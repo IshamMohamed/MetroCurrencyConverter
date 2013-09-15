@@ -1,0 +1,624 @@
+﻿<common:LayoutAwarePage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MetroCurrencyConverter"
+    xmlns:common="using:MetroCurrencyConverter.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
+    x:Name="pageRoot"
+    x:Class="MetroCurrencyConverter.MainPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
+    mc:Ignorable="d">
+
+    <common:LayoutAwarePage.Resources>
+
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <x:String x:Key="AppName">Metro Currency Converter</x:String>
+    </common:LayoutAwarePage.Resources>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid x:Name="RootPage" Style="{StaticResource LayoutRootStyle}" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <VisualStateManager.VisualStateGroups>
+
+            <!-- Visual states reflect the application's view state -->
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState
+                x:Name="FullScreenLandscape">
+                    <Storyboard
+                >
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="progressRingWebView">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>430</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Filled">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="webview">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>926</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="webview">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>316</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="webview">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,274,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="progressRingWebView">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>298,274,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="progressRingWebView">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>316</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="fromCurrencyListCombo">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,161,0,394</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="lhsTextBox">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>300</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="progressRingGoButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>464,20,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="btnConvert">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>464,89,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="toCurrencyListCombo">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>676,161,0,394</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="rhsTextBox">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>300</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="progressRingGoButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>214</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="progressRingGoButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>114</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="btnConvert">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>114</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="txtGraphName">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,247,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <!-- The entire page respects the narrower 100-pixel margin convention for portrait -->
+                <VisualState x:Name="FullScreenPortrait">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="webview">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>0,750,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="webview">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>768</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="webview">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>448</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="fromCurrencyListCombo">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,136,0,1001</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="fromCurrencyListCombo">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>662</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="progressRingGoButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>314,269,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="btnConvert">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>314,281,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="progressRingWebView">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>189,750,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="toCurrencyListCombo">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,559,0,578</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="toCurrencyListCombo">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>662</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rhsTextBox">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>0,446,56,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="lhsTextBox">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>662</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="rhsTextBox">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>662</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="progressRingWebView">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>448</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="txtGraphName">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,726,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="txtGraphName">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>708</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="txtGraphName">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>19</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="txtGraphName">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value=""/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                    </Storyboard>
+                </VisualState>
+
+                <!-- The back button and title have different styles when snapped -->
+                <VisualState x:Name="Snapped">
+                    <Storyboard>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="webview">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>200</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="webview">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>2</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="webview">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,628,0,-2</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="rhsTextBox">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>0,463,70,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="fromCurrencyListCombo">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,125,0,430</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="fromCurrencyListCombo">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>200</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="toCurrencyListCombo">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>200</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="toCurrencyListCombo">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,387,0,168</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="btnConvert">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>200</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="btnConvert">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,260,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="btnConvert">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>74</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="progressRingGoButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>200</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="progressRingGoButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>50,260,0,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="progressRingGoButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Double>74</x:Double>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="txtGraphName">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>419,176,-1030,0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <!-- Back button and page title -->
+
+
+        <!-- Back button and page title -->
+
+
+        <!-- Back button and page title -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE000000" Margin="50,0,65,10" Height="90"/>
+        </Grid>
+        <TextBox x:Name="lhsTextBox" HorizontalAlignment="Left" Margin="50,20,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="100" Width="200" FontSize="20" BorderBrush="Black" Background="White"/>
+        <TextBox x:Name="rhsTextBox" HorizontalAlignment="Right" Margin="0,20,48,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="100" Width="200" FontSize="20" BorderBrush="Black" Background="White"/>
+        <WebView x:Name="webview" HorizontalAlignment="Left" Margin="50,151,0,0" Grid.Row="1" VerticalAlignment="Top" Height="439" Width="1268"  RenderTransformOrigin="0.5,0.5"/>
+
+        <ComboBox x:Name="toCurrencyListCombo" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged" RenderTransformOrigin="-0.75,1.907" Margin="792,35,0,520" Grid.Row="1" HorizontalAlignment="Left" Width="300" FontSize="30" BorderBrush="#CC000000" Background="#CCFFFFFF">
+            <x:String>United Arab Emirates Dirham (AED)</x:String>
+            <x:String>Netherlands Antillean Guilder (ANG)</x:String>
+            <x:String>Argentine Peso (ARS)</x:String>
+            <x:String>Australian Dollar (AUD)</x:String>
+            <x:String>Bangladeshi Taka (BDT)</x:String>
+            <x:String>Bulgarian Lev (BGN)</x:String>
+            <x:String>Bahraini Dinar (BHD)</x:String>
+            <x:String>Brunei Dollar (BND)</x:String>
+            <x:String>Bolivian Boliviano (BOB)</x:String>
+            <x:String>Brazilian Real (BRL)</x:String>
+            <x:String>Botswanan Pula (BWP)</x:String>
+            <x:String>Canadian Dollar (CAD)</x:String>
+            <x:String>Swiss Franc (CHF)</x:String>
+            <x:String>Chilean Peso (CLP)</x:String>
+            <x:String>Chinese Yuan (CNY)</x:String>
+            <x:String>Colombian Peso (COP)</x:String>
+            <x:String>Costa Rican Colón (CRC)</x:String>
+            <x:String>Czech Republic Koruna (CZK)</x:String>
+            <x:String>Danish Krone (DKK)</x:String>
+            <x:String>Dominican Peso (DOP)</x:String>
+            <x:String>Algerian Dinar (DZD)</x:String>
+            <x:String>Estonian Kroon (EEK)</x:String>
+            <x:String>Egyptian Pound (EGP)</x:String>
+            <x:String>Euro (EUR)</x:String>
+            <x:String>Fijian Dollar (FJD)</x:String>
+            <x:String>British Pound Sterling (GBP)</x:String>
+            <x:String>Hong Kong Dollar (HKD)</x:String>
+            <x:String>Honduran Lempira (HNL)</x:String>
+            <x:String>Croatian Kuna (HRK)</x:String>
+            <x:String>Hungarian Forint (HUF)</x:String>
+            <x:String>Indonesian Rupiah (IDR)</x:String>
+            <x:String>Israeli New Sheqel (ILS)</x:String>
+            <x:String>Indian Rupee (INR)</x:String>
+            <x:String>Jamaican Dollar (JMD)</x:String>
+            <x:String>Jordanian Dinar (JOD)</x:String>
+            <x:String>Japanese Yen (JPY)</x:String>
+            <x:String>Kenyan Shilling (KES)</x:String>
+            <x:String>South Korean Won (KRW)</x:String>
+            <x:String>Kuwaiti Dinar (KWD)</x:String>
+            <x:String>Cayman Islands Dollar (KYD)</x:String>
+            <x:String>Kazakhstani Tenge (KZT)</x:String>
+            <x:String>Lebanese Pound (LBP)</x:String>
+            <x:String>Sri Lankan Rupee (LKR)</x:String>
+            <x:String>Lithuanian Litas (LTL)</x:String>
+            <x:String>Latvian Lats (LVL)</x:String>
+            <x:String>Moroccan Dirham (MAD)</x:String>
+            <x:String>Moldovan Leu (MDL)</x:String>
+            <x:String>Macedonian Denar (MKD)</x:String>
+            <x:String>Mauritian Rupee (MUR)</x:String>
+            <x:String>Maldivian Rufiyaa (MVR)</x:String>
+            <x:String>Mexican Peso (MXN)</x:String>
+            <x:String>Malaysian Ringgit (MYR)</x:String>
+            <x:String>Namibian Dollar (NAD)</x:String>
+            <x:String>Nigerian Naira (NGN)</x:String>
+            <x:String>Nicaraguan Córdoba (NIO)</x:String>
+            <x:String>Norwegian Krone (NOK)</x:String>
+            <x:String>Nepalese Rupee (NPR)</x:String>
+            <x:String>New Zealand Dollar (NZD)</x:String>
+            <x:String>Omani Rial (OMR)</x:String>
+            <x:String>Peruvian Nuevo Sol (PEN)</x:String>
+            <x:String>Papua New Guinean Kina (PGK)</x:String>
+            <x:String>Philippine Peso (PHP)</x:String>
+            <x:String>Pakistani Rupee (PKR)</x:String>
+            <x:String>Polish Zloty (PLN)</x:String>
+            <x:String>Paraguayan Guarani (PYG)</x:String>
+            <x:String>Qatari Rial (QAR)</x:String>
+            <x:String>Romanian Leu (RON)</x:String>
+            <x:String>Serbian Dinar (RSD)</x:String>
+            <x:String>Russian Ruble (RUB)</x:String>
+            <x:String>Saudi Riyal (SAR)</x:String>
+            <x:String>Seychellois Rupee (SCR)</x:String>
+            <x:String>Swedish Krona (SEK)</x:String>
+            <x:String>Singapore Dollar (SGD)</x:String>
+            <x:String>Slovak Koruna (SKK)</x:String>
+            <x:String>Sierra Leonean Leone (SLL)</x:String>
+            <x:String>Salvadoran Colón (SVC)</x:String>
+            <x:String>Thai Baht (THB)</x:String>
+            <x:String>Tunisian Dinar (TND)</x:String>
+            <x:String>Turkish Lira (TRY)</x:String>
+            <x:String>Trinidad and Tobago Dollar (TTD)</x:String>
+            <x:String>New Taiwan Dollar (TWD)</x:String>
+            <x:String>Tanzanian Shilling (TZS)</x:String>
+            <x:String>Ukrainian Hryvnia (UAH)</x:String>
+            <x:String>Ugandan Shilling (UGX)</x:String>
+            <x:String>US Dollar (USD)</x:String>
+            <x:String>Uruguayan Peso (UYU)</x:String>
+            <x:String>Uzbekistan Som (UZS)</x:String>
+            <x:String>Venezuelan Bolívar (VEF)</x:String>
+            <x:String>Vietnamese Dong (VND)</x:String>
+            <x:String>CFA Franc BCEAO (XOF)</x:String>
+            <x:String>Yemeni Rial (YER)</x:String>
+            <x:String>South African Rand (ZAR)</x:String>
+            <x:String>Zambian Kwacha (ZMK)</x:String>
+        </ComboBox>
+        <Button x:Name="btnConvert" Content="Go!!" HorizontalAlignment="Left" VerticalAlignment="Top" Height="73" RenderTransformOrigin="0.447,0.629" Width="114" Margin="629,35,0,0" Grid.Row="1" FontSize="35" Background="#FF3594F5"/>
+        <ComboBox x:Name="fromCurrencyListCombo" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged" RenderTransformOrigin="-0.75,1.907" Margin="270,35,0,520" Grid.Row="1" HorizontalAlignment="Left" Width="300" FontSize="30" BorderBrush="#CC000000">
+            <x:String>United Arab Emirates Dirham (AED)</x:String>
+            <x:String>Netherlands Antillean Guilder (ANG)</x:String>
+            <x:String>Argentine Peso (ARS)</x:String>
+            <x:String>Australian Dollar (AUD)</x:String>
+            <x:String>Bangladeshi Taka (BDT)</x:String>
+            <x:String>Bulgarian Lev (BGN)</x:String>
+            <x:String>Bahraini Dinar (BHD)</x:String>
+            <x:String>Brunei Dollar (BND)</x:String>
+            <x:String>Bolivian Boliviano (BOB)</x:String>
+            <x:String>Brazilian Real (BRL)</x:String>
+            <x:String>Botswanan Pula (BWP)</x:String>
+            <x:String>Canadian Dollar (CAD)</x:String>
+            <x:String>Swiss Franc (CHF)</x:String>
+            <x:String>Chilean Peso (CLP)</x:String>
+            <x:String>Chinese Yuan (CNY)</x:String>
+            <x:String>Colombian Peso (COP)</x:String>
+            <x:String>Costa Rican Colón (CRC)</x:String>
+            <x:String>Czech Republic Koruna (CZK)</x:String>
+            <x:String>Danish Krone (DKK)</x:String>
+            <x:String>Dominican Peso (DOP)</x:String>
+            <x:String>Algerian Dinar (DZD)</x:String>
+            <x:String>Estonian Kroon (EEK)</x:String>
+            <x:String>Egyptian Pound (EGP)</x:String>
+            <x:String>Euro (EUR)</x:String>
+            <x:String>Fijian Dollar (FJD)</x:String>
+            <x:String>British Pound Sterling (GBP)</x:String>
+            <x:String>Hong Kong Dollar (HKD)</x:String>
+            <x:String>Honduran Lempira (HNL)</x:String>
+            <x:String>Croatian Kuna (HRK)</x:String>
+            <x:String>Hungarian Forint (HUF)</x:String>
+            <x:String>Indonesian Rupiah (IDR)</x:String>
+            <x:String>Israeli New Sheqel (ILS)</x:String>
+            <x:String>Indian Rupee (INR)</x:String>
+            <x:String>Jamaican Dollar (JMD)</x:String>
+            <x:String>Jordanian Dinar (JOD)</x:String>
+            <x:String>Japanese Yen (JPY)</x:String>
+            <x:String>Kenyan Shilling (KES)</x:String>
+            <x:String>South Korean Won (KRW)</x:String>
+            <x:String>Kuwaiti Dinar (KWD)</x:String>
+            <x:String>Cayman Islands Dollar (KYD)</x:String>
+            <x:String>Kazakhstani Tenge (KZT)</x:String>
+            <x:String>Lebanese Pound (LBP)</x:String>
+            <x:String>Sri Lankan Rupee (LKR)</x:String>
+            <x:String>Lithuanian Litas (LTL)</x:String>
+            <x:String>Latvian Lats (LVL)</x:String>
+            <x:String>Moroccan Dirham (MAD)</x:String>
+            <x:String>Moldovan Leu (MDL)</x:String>
+            <x:String>Macedonian Denar (MKD)</x:String>
+            <x:String>Mauritian Rupee (MUR)</x:String>
+            <x:String>Maldivian Rufiyaa (MVR)</x:String>
+            <x:String>Mexican Peso (MXN)</x:String>
+            <x:String>Malaysian Ringgit (MYR)</x:String>
+            <x:String>Namibian Dollar (NAD)</x:String>
+            <x:String>Nigerian Naira (NGN)</x:String>
+            <x:String>Nicaraguan Córdoba (NIO)</x:String>
+            <x:String>Norwegian Krone (NOK)</x:String>
+            <x:String>Nepalese Rupee (NPR)</x:String>
+            <x:String>New Zealand Dollar (NZD)</x:String>
+            <x:String>Omani Rial (OMR)</x:String>
+            <x:String>Peruvian Nuevo Sol (PEN)</x:String>
+            <x:String>Papua New Guinean Kina (PGK)</x:String>
+            <x:String>Philippine Peso (PHP)</x:String>
+            <x:String>Pakistani Rupee (PKR)</x:String>
+            <x:String>Polish Zloty (PLN)</x:String>
+            <x:String>Paraguayan Guarani (PYG)</x:String>
+            <x:String>Qatari Rial (QAR)</x:String>
+            <x:String>Romanian Leu (RON)</x:String>
+            <x:String>Serbian Dinar (RSD)</x:String>
+            <x:String>Russian Ruble (RUB)</x:String>
+            <x:String>Saudi Riyal (SAR)</x:String>
+            <x:String>Seychellois Rupee (SCR)</x:String>
+            <x:String>Swedish Krona (SEK)</x:String>
+            <x:String>Singapore Dollar (SGD)</x:String>
+            <x:String>Slovak Koruna (SKK)</x:String>
+            <x:String>Sierra Leonean Leone (SLL)</x:String>
+            <x:String>Salvadoran Colón (SVC)</x:String>
+            <x:String>Thai Baht (THB)</x:String>
+            <x:String>Tunisian Dinar (TND)</x:String>
+            <x:String>Turkish Lira (TRY)</x:String>
+            <x:String>Trinidad and Tobago Dollar (TTD)</x:String>
+            <x:String>New Taiwan Dollar (TWD)</x:String>
+            <x:String>Tanzanian Shilling (TZS)</x:String>
+            <x:String>Ukrainian Hryvnia (UAH)</x:String>
+            <x:String>Ugandan Shilling (UGX)</x:String>
+            <x:String>US Dollar (USD)</x:String>
+            <x:String>Uruguayan Peso (UYU)</x:String>
+            <x:String>Uzbekistan Som (UZS)</x:String>
+            <x:String>Venezuelan Bolívar (VEF)</x:String>
+            <x:String>Vietnamese Dong (VND)</x:String>
+            <x:String>CFA Franc BCEAO (XOF)</x:String>
+            <x:String>Yemeni Rial (YER)</x:String>
+            <x:String>South African Rand (ZAR)</x:String>
+            <x:String>Zambian Kwacha (ZMK)</x:String>
+        </ComboBox>
+        <ProgressRing x:Name="progressRingGoButton" IsActive="False" HorizontalAlignment="Left" Margin="629,20,0,0" VerticalAlignment="Top" Height="100" Width="114" RenderTransformOrigin="0.456,-0.014" Grid.Row="1"/>
+        <ProgressRing x:Name="progressRingWebView" IsActive="False" HorizontalAlignment="Left" Margin="489,160,0,0" Grid.Row="1" VerticalAlignment="Top" Height="415" Width="403" RenderTransformOrigin="0.484,0.476"/>
+        <TextBlock x:Name="txtGraphName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Margin="50,129,0,0" Grid.Row="1" Height="22" Width="931"/>
+
+    </Grid>
+</common:LayoutAwarePage>
